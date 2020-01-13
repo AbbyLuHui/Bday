@@ -2,7 +2,9 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import { config } from "./config";
 'use strict';
+
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({color: '#3aa757'}, function() {
@@ -27,6 +29,6 @@ chrome.runtime.onMessage.addListener(
 )
 
 function calendar(object){
-  var CLIENT_ID = process.env.CLIENT_ID;
-  var API_KEY = process.env.API_KEY;
+  var CLIENT_ID = config.CLIENT_ID;
+  var API_KEY = config.API_KEY;
 }
