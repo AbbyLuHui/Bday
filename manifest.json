@@ -13,7 +13,7 @@
     }
   ],
   "background": {
-  "scripts": ["background.js"],
+  "scripts": ["background.js","require.js"],
   "persistent": false
   },
   "page_action":{
