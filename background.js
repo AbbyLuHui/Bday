@@ -2,9 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import { config } from "./config";
 'use strict';
-
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({color: '#3aa757'}, function() {
@@ -25,10 +23,18 @@ chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse){
     console.log(request.friend);
     sendResponse({sent: "sent"});
-  }
-)
+    chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+      const headers = new Headers({
+      'Authorization' : 'Bearer ' + token,
+      'Content-Type': 'application/json'
+      })
 
-function calendar(object){
-  var CLIENT_ID = config.CLIENT_ID;
-  var API_KEY = config.API_KEY;
-}
+      const queryParams = { headers };
+
+      fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', queryParams)
+        .then((response) => response.json()) // Transform the data into json
+        .then(function(data) {
+        console.log("Succeed");
+        })
+      })
+    });

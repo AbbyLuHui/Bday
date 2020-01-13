@@ -2,7 +2,11 @@
   "name": "Birthday",
   "version": "1.0",
   "description": "Build an Extension!",
-  "permissions":["activeTab","declarativeContent","storage"],
+  "permissions":["identity","activeTab","declarativeContent","storage"],
+  "oauth2":{
+    "client_id":"10472574227-e5drsmg7ped4v91ccfg1kfp01af8nk8r.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/calendar"]
+  },
   "options_page":"options.html",
   "content_scripts":[
     {
@@ -13,8 +17,8 @@
     }
   ],
   "background": {
-  "scripts": ["background.js","require.js"],
-  "persistent": false
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "page_action":{
     "default_popup": "popup.html",
