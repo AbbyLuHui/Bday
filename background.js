@@ -52,15 +52,14 @@ chrome.runtime.onMessage.addListener(
 
       var event = {
         'summary': name + "'s Birthday",
-        'description': 'Wish him/her happy birthday! Save enough time to prepare gift!',
         'start': {
           'date': curr_year_bday
         },
         'end': {
-          'dateTime': curr_year_bday
+          'date': curr_year_bday
         },
         'recurrence': [
-          'RRULE:FREQ=ANNUALLY;COUNT=2'
+          'RRULE:FREQ=YEARLY;COUNT=2'
         ],
         'reminders': {
           'useDefault': false,
