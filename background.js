@@ -4,6 +4,7 @@
 
 'use strict';
 
+
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({color: '#3aa757'}, function() {
     console.log("The color is green.");
@@ -21,7 +22,7 @@ chrome.runtime.onInstalled.addListener(function() {
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse){
-    console.log(request.friend);
+    console.log(request.friend)
     sendResponse({sent: "sent"});
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
       const headers = new Headers({
@@ -34,6 +35,7 @@ chrome.runtime.onMessage.addListener(
       fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', queryParams)
         .then((response) => response.json()) // Transform the data into json
         .then(function(data) {
+
         console.log("Succeed");
         })
       })
@@ -69,12 +71,12 @@ chrome.runtime.onMessage.addListener(
           ]
         }
       };
-      
+
       var request = gapi.client.calendar.events.insert({
         'calendarId': 'primary',
         'resource': event
       });
-      
+
       request.execute(function(event) {
         appendPre('Event created: ' + event.htmlLink);
       });
