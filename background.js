@@ -27,7 +27,7 @@ chrome.runtime.onMessage.addListener(
 
       console.log('token', token)
 
-    
+
       //loadScript('https://apis.google.com/js/client.js');
       //authorize();
 
@@ -59,7 +59,6 @@ chrome.runtime.onMessage.addListener(
 
       var event = {
         'summary': name + "'s Birthday",
-        'description': 'Wish him/her happy birthday! Save enough time to prepare gift!',
         'start': {
           'date': curr_year_bday
         },
