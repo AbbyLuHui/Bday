@@ -35,36 +35,43 @@ chrome.runtime.onMessage.addListener(
       fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', queryParams)
         .then((response) => response.json()) // Transform the data into json
         .then(function(data) {
-        console.log("Succeed")
+
+        console.log("Succeed");
+        })
+      })
+      // Lucy Chen (2/7)
+      var lst = request.friend.split('(')
+      var name = lst[0].trim()
+      var date_lst = lst[1].split(')')
+      var date = date_lst[0]
+      var month = date.split('/')[0]
+      var day = date.split('/')[1]
+      var d = new Date()
+      var curr_year = d.getFullYear()
+
+      var curr_year_bday = curr_year+'-'+month+'-'+day
+      console.log(name, curr_year_bday)
 
       var event = {
-        'summary': "TEST",
-        'location': '800 Howard St., San Francisco, CA 94103',
-        'description': 'A chance to hear more about Google\'s developer products.',
+        'summary': name + "'s Birthday",
+        'description': 'Wish him/her happy birthday! Save enough time to prepare gift!',
         'start': {
-          'dateTime': '2020-05-28T09:00:00-07:00',
-          'timeZone': 'America/Los_Angeles'
+          'date': curr_year_bday
         },
         'end': {
-          'dateTime': '2020-05-28T17:00:00-07:00',
-          'timeZone': 'America/Los_Angeles'
+          'dateTime': curr_year_bday
         },
         'recurrence': [
-          'RRULE:FREQ=DAILY;COUNT=2'
-        ],
-        'attendees': [
-          {'email': 'lpage@example.com'},
-          {'email': 'sbrin@example.com'}
+          'RRULE:FREQ=ANNUALLY;COUNT=2'
         ],
         'reminders': {
           'useDefault': false,
           'overrides': [
-            {'method': 'email', 'minutes': 24 * 60},
+            {'method': 'email', 'minutes': 72 * 60},
             {'method': 'popup', 'minutes': 10}
           ]
         }
       };
-
 
       var request = gapi.client.calendar.events.insert({
         'calendarId': 'primary',
@@ -74,6 +81,4 @@ chrome.runtime.onMessage.addListener(
       request.execute(function(event) {
         appendPre('Event created: ' + event.htmlLink);
       });
-    })
-  })
-});
+    });
