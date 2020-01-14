@@ -37,4 +37,46 @@ chrome.runtime.onMessage.addListener(
         console.log("Succeed");
         })
       })
+      // Lucy Chen (2/7)
+      var lst = request.friend.split('(')
+      var name = lst[0].trim()
+      var date_lst = lst[1].split(')')
+      var date = date_lst[0]
+      var month = date.split('/')[0]
+      var day = date.split('/')[1]
+      var d = new Date()
+      var curr_year = d.getFullYear()
+
+      var curr_year_bday = curr_year+'-'+month+'-'+day
+      console.log(name, curr_year_bday)
+
+      var event = {
+        'summary': name + "'s Birthday",
+        'description': 'Wish him/her happy birthday! Save enough time to prepare gift!',
+        'start': {
+          'date': curr_year_bday
+        },
+        'end': {
+          'dateTime': curr_year_bday
+        },
+        'recurrence': [
+          'RRULE:FREQ=ANNUALLY;COUNT=2'
+        ],
+        'reminders': {
+          'useDefault': false,
+          'overrides': [
+            {'method': 'email', 'minutes': 72 * 60},
+            {'method': 'popup', 'minutes': 10}
+          ]
+        }
+      };
+      
+      var request = gapi.client.calendar.events.insert({
+        'calendarId': 'primary',
+        'resource': event
+      });
+      
+      request.execute(function(event) {
+        appendPre('Event created: ' + event.htmlLink);
+      });
     });
