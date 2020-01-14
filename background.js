@@ -4,7 +4,6 @@
 
 'use strict';
 
-
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({color: '#3aa757'}, function() {
     console.log("The color is green.");
@@ -25,9 +24,16 @@ chrome.runtime.onMessage.addListener(
     console.log(request.friend)
     sendResponse({sent: "sent"});
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+
+      console.log('token', token)
+
+    
+      //loadScript('https://apis.google.com/js/client.js');
+      //authorize();
+
       const headers = new Headers({
-      'Authorization' : 'Bearer ' + token,
-      'Content-Type': 'application/json'
+        'Authorization' : 'Bearer ' + token,
+        'Content-Type': 'application/json'
       })
 
       const queryParams = { headers };
@@ -35,10 +41,9 @@ chrome.runtime.onMessage.addListener(
       fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', queryParams)
         .then((response) => response.json()) // Transform the data into json
         .then(function(data) {
-
-        console.log("Succeed");
+          console.log('fetching events response', data)
         })
-      })
+
       // Lucy Chen (2/7)
       var lst = request.friend.split('(')
       var name = lst[0].trim()
@@ -59,10 +64,10 @@ chrome.runtime.onMessage.addListener(
           'date': curr_year_bday
         },
         'end': {
-          'dateTime': curr_year_bday
+          'date': curr_year_bday
         },
         'recurrence': [
-          'RRULE:FREQ=ANNUALLY;COUNT=2'
+           'RRULE:FREQ=YEARLY;COUNT=2'
         ],
         'reminders': {
           'useDefault': false,
@@ -73,12 +78,27 @@ chrome.runtime.onMessage.addListener(
         }
       };
 
-      var request = gapi.client.calendar.events.insert({
-        'calendarId': 'primary',
-        'resource': event
-      });
+      console.log('creating event: ', event)
 
-      request.execute(function(event) {
-        appendPre('Event created: ' + event.htmlLink);
-      });
-    });
+      const createParams = {
+        headers: headers,
+        method: "POST",
+        body: JSON.stringify(event)
+      };
+
+      fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', createParams)
+        .then((response) => response.json()) // Transform the data into json
+        .then(function(data) {
+          console.log('fetching events response', data)
+        })
+
+      // var request = gapi.client.calendar.events.insert({
+      //   'calendarId': 'primary',
+      //   'resource': event
+      // });
+      //
+      // request.execute(function(event) {
+      //   console.log('Event created: ' + event.htmlLink);
+      // });
+    })
+});

@@ -17,7 +17,7 @@
     }
   ],
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["background.js", "api.js"],
     "persistent": false
   },
   "page_action":{
@@ -35,5 +35,6 @@
     "48": "images/get_started48.png",
     "128": "images/get_started128.png"
   },
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
   "manifest_version": 2
 }
