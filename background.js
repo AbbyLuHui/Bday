@@ -47,7 +47,6 @@ chrome.runtime.onMessage.addListener(
       var curr_year = d.getFullYear()
 
       curr_year_bday = curr_year+'-'+month+'-'+day
-      console.log(name, curr_year_bday)
 
       event = {
         'summary': name + "'s Birthday",
@@ -69,8 +68,6 @@ chrome.runtime.onMessage.addListener(
         }
       };
 
-      //console.log('creating event: ', event)
-
       //save to storage
       var bday_data;
       chrome.storage.local.get(['birthday'], function(data){
@@ -78,11 +75,12 @@ chrome.runtime.onMessage.addListener(
           bday_data = data.birthday;
           bday_data[[name]]={"date":curr_year_bday, "gifturl":"", "giftdescription":""};
           chrome.storage.local.set({"birthday":bday_data}, function(){
-            console.log(bday_data);
+            console.log("defined,", bday_data);
           });
         } else{
           bday_data = {"birthday":{[name]:{"date":curr_year_bday, "gifturl":"", "giftdescription":""}}};
           chrome.storage.local.set(bday_data);
+          console.log("undefined,", bday_data);
         };
       });
 
@@ -96,7 +94,6 @@ chrome.runtime.onMessage.addListener(
       fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', createParams)
         .then((response) => response.json()) // Transform the data into json
         .then(function(data) {
-          //console.log('creating events response', data)
         })
       }
 

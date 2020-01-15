@@ -20,12 +20,19 @@
 // };
 let displayBirthday = document.getElementById('displayBirthday');
 chrome.storage.local.get(['birthday'], function(data){
-    
-    displayBirthday.rows[0].cells[0].innerHTML = data.birthday.name;
-    displayBirthday.rows[0].cells[1].innerHTML = data.birthday.date;
-    displayBirthday.rows[1].cells[0].innerHTML = data.birthday.gifturl;
-    displayBirthday.rows[1].cells[1].innerHTML = data.birthday.giftdescription;
-    console.log(data.birthday.gifturl);
+    console.log(data.birthday);
+    var bday = data.birthday;
+    var names = Object.keys(bday);
+    console.log(names);
+    var i = 0;
+    for (var index in names){
+      let name = names[index];
+      // console.log(names[index]);
+      console.log(bday[name]);
+      displayBirthday.rows[i].cells[0].innerHTML = name;
+      displayBirthday.rows[i].cells[1].innerHTML = bday[[name]].date;
+      i += 1;
+    }
 });
 
 let addGift = document.getElementById('addGift');
