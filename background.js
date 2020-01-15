@@ -19,34 +19,26 @@ chrome.runtime.onInstalled.addListener(function() {
     });
 });
 
+var event;
+var name;
+var curr_year_bday;
+
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse){
     console.log(request.friend)
     sendResponse({sent: "sent"});
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
 
-      console.log('token', token)
-
-
-      //loadScript('https://apis.google.com/js/client.js');
-      //authorize();
-
       const headers = new Headers({
         'Authorization' : 'Bearer ' + token,
         'Content-Type': 'application/json'
       })
 
-      const queryParams = { headers };
+      //ADD WHEN REQUEST.FRIEND == NULL TO ACCOUNT FOR RANDOM RIGHT CLICK ON THE PAGE
 
-      fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', queryParams)
-        .then((response) => response.json()) // Transform the data into json
-        .then(function(data) {
-          console.log('fetching events response', data)
-        })
-
-      // Lucy Chen (2/7)
+      if (request.friend !== "null" && request.friend !== "UNDO"){
       var lst = request.friend.split('(')
-      var name = lst[0].trim()
+      name = lst[0].trim()
       var date_lst = lst[1].split(')')
       var date = date_lst[0]
       var month = date.split('/')[0]
@@ -54,10 +46,10 @@ chrome.runtime.onMessage.addListener(
       var d = new Date()
       var curr_year = d.getFullYear()
 
-      var curr_year_bday = curr_year+'-'+month+'-'+day
+      curr_year_bday = curr_year+'-'+month+'-'+day
       console.log(name, curr_year_bday)
 
-      var event = {
+      event = {
         'summary': name + "'s Birthday",
         'start': {
           'date': curr_year_bday
@@ -77,7 +69,21 @@ chrome.runtime.onMessage.addListener(
         }
       };
 
-      console.log('creating event: ', event)
+      //console.log('creating event: ', event)
+
+      //save to storage
+      // var saved_data;
+      // try{
+      //   chrome.storage.sync.get(['birthday'], function(data){
+      //     saved_data = data['birthday'][name]={"date":curr_year_bday};
+      //   });
+      // } catch(error){
+      //   saved_data={'birthday':{name:{"date":curr_year_bday}}}
+      // }
+      // console.log(saved_data)
+      chrome.storage.sync.set({"birthday":{"name":name, "date":curr_year_bday, "gifturl":"", "giftdescription":""}}, function() {
+        console.log("saved");
+      });
 
       const createParams = {
         headers: headers,
@@ -88,16 +94,30 @@ chrome.runtime.onMessage.addListener(
       fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', createParams)
         .then((response) => response.json()) // Transform the data into json
         .then(function(data) {
-          console.log('fetching events response', data)
+          //console.log('creating events response', data)
         })
+      }
 
-      // var request = gapi.client.calendar.events.insert({
-      //   'calendarId': 'primary',
-      //   'resource': event
-      // });
-      //
-      // request.execute(function(event) {
-      //   console.log('Event created: ' + event.htmlLink);
-      // });
+      if (request.friend == "UNDO"){
+        const deleteParams = {
+          headers: headers,
+          method: "DELETE",
+          body: JSON.stringify(event)
+        };
+        fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', createParams)
+          .then((response) => response.json()) // Transform the data into json
+          .then(function(data) {
+            console.log('deleting events response', data)
+          })
+        chrome.storage.local.remove({name})
+      }
     })
 });
+
+//const queryParams = { headers };
+
+//fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', queryParams)
+//  .then((response) => response.json()) // Transform the data into json
+//  .then(function(data) {
+//    console.log('fetching events response', data)
+//  })
