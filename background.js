@@ -72,18 +72,20 @@ chrome.runtime.onMessage.addListener(
       //console.log('creating event: ', event)
 
       //save to storage
-      // var saved_data;
-      // try{
-      //   chrome.storage.sync.get(['birthday'], function(data){
-      //     saved_data = data['birthday'][name]={"date":curr_year_bday};
-      //   });
-      // } catch(error){
-      //   saved_data={'birthday':{name:{"date":curr_year_bday}}}
-      // }
-      // console.log(saved_data)
-      chrome.storage.local.set({"birthday":{"name":name, "date":curr_year_bday, "gifturl":"", "giftdescription":""}}, function() {
-        console.log("saved");
+      var bday_data;
+      chrome.storage.local.get(['birthday'], function(data){
+        if (data !== 'undefined'){
+          bday_data = data.birthday;
+          bday_data[[name]]={"date":curr_year_bday, "gifturl":"", "giftdescription":""};
+          chrome.storage.local.set({"birthday":bday_data}, function(){
+            console.log(bday_data);
+          });
+        } else{
+          bday_data = {"birthday":{[name]:{"date":curr_year_bday, "gifturl":"", "giftdescription":""}}};
+          chrome.storage.local.set(bday_data);
+        };
       });
+
 
       const createParams = {
         headers: headers,
