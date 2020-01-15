@@ -19,7 +19,7 @@
 //   });
 // };
 let displayBirthday = document.getElementById('displayBirthday');
-chrome.storage.sync.get(['birthday', 'color'], function(data){
+chrome.storage.local.get(['birthday', 'color'], function(data){
     displayBirthday.rows[0].cells[0].innerHTML = data.birthday.name;
     displayBirthday.rows[0].cells[1].innerHTML = data.birthday.date;
     displayBirthday.rows[1].cells[0].innerHTML = data.birthday.gifturl;

@@ -5,7 +5,7 @@
 'use strict';
 
 chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.sync.set({color: '#3aa757'}, function() {
+  chrome.storage.local.set({color: '#3aa757'}, function() {
     console.log("The color is green.");
   });
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
@@ -81,7 +81,7 @@ chrome.runtime.onMessage.addListener(
       //   saved_data={'birthday':{name:{"date":curr_year_bday}}}
       // }
       // console.log(saved_data)
-      chrome.storage.sync.set({"birthday":{"name":name, "date":curr_year_bday, "gifturl":"", "giftdescription":""}}, function() {
+      chrome.storage.local.set({"birthday":{"name":name, "date":curr_year_bday, "gifturl":"", "giftdescription":""}}, function() {
         console.log("saved");
       });
 

@@ -27,15 +27,12 @@ giftSubmitButton.onclick = function(element){
   let description = document.getElementById('description').value;
   var modified={};
   var date="";
-  chrome.storage.sync.get(['birthday'], function(data){
+  chrome.storage.local.get(['birthday'], function(data){
     modified = {"birthday":{"name":data.birthday.name, "date":data.birthday.date, "gifturl":url, "giftdescription":description}};
+    chrome.storage.local.set(modified, function(){
+      console.log("modified");
+    });
   });
-  console.log("--------");
-  console.log(date);
-  console.log(modified);
-  window.location.href = "popup.html";
-  chrome.storage.sync.set(modified, function(){
     //window.location.href = "popup.html";
-  });
 
 }
