@@ -44,3 +44,8 @@
  }
  W.addEventListener('load',init,false);
 })(window)
+
+let addGift = document.getElementById('addGift');
+addGift.onclick = function(element){
+  window.location.href = "addgift.html";
+}

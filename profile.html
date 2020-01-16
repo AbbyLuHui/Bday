@@ -20,6 +20,9 @@ form>button:nth-of-type(3){
 form>button:nth-of-type(4){
   color:black;display:inline-block;
 }
+form>button:nth-of-type(5){
+  color:black;display:inline-block;
+}
 form.invert>button:nth-of-type(1){
  display:inline-block;
 }
@@ -30,20 +33,25 @@ form.invert>button:nth-of-type(3){
  display:none;
 }
 form.invert>button:nth-of-type(4){
-  display:none
+  display:none;
+}
+form.invert>button:nth-of-type(5){
+  display:none;
 }
 </style>
 </head>
 <body>
 <form>
-<label>A:<input readonly></label>
-<label>B:<input readonly></label>
-<label>C:<input readonly></label>
+<label>Name:<input readonly></label>
+<label>Phone:<input readonly></label>
+<label>Message:<input readonly></label>
 <button>Save</button>
 <button>Cancel</button>
 <button>Edit</button>
 <button>Back</button>
+<button id=addGift>add gift</button>
 </form>
+
 <script src = "profile.js"></script>
 </body>
 </html>

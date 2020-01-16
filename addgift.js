@@ -27,17 +27,17 @@ giftSubmitButton.onclick = function(element){
   let description = document.getElementById('description').value;
   var modified={};
   var date="";
-  chrome.storage.local.get([name], function(data){
-    modified = {"birthday":{"name":data.birthday.name, "date":data.birthday.date, "gifturl":url, "giftdescription":description}};
-    chrome.storage.local.set(modified, function(){
-      console.log("modified");
-    });
-  });
-  window.location.href = "popup.html";
+  // chrome.storage.local.get([name], function(data){
+  //   modified = {"birthday":{"name":data.birthday.name, "date":data.birthday.date, "gifturl":url, "giftdescription":description}};
+  //   chrome.storage.local.set(modified, function(){
+  //     console.log("modified");
+  //   });
+  // });
+  window.location.href = "profile.html";
 
 }
 
 let giftCancelButton = document.getElementById('giftCancelButton');
 giftCancelButton.onclick = function(element){
-  window.location.href = 'popup.html';
+  window.location.href = 'profile.html';
 }

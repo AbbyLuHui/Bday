@@ -44,10 +44,7 @@ chrome.storage.local.get(['birthday'], function(data){
     }
 });
 
-let addGift = document.getElementById('addGift');
-addGift.onclick = function(element){
-  window.location.href = "addgift.html";
-}
+
 
 document.body.onclick = function(element){
   if (element.target.name == "friend"){
