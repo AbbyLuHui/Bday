@@ -24,14 +24,19 @@ chrome.storage.local.get(['birthday'], function(data){
     var bday = data.birthday;
     var names = Object.keys(bday);
     console.log(names);
-    var i = 0;
     for (var index in names){
       let name = names[index];
-      // console.log(names[index]);
       console.log(bday[name]);
-      displayBirthday.rows[i].cells[0].innerHTML = name;
-      displayBirthday.rows[i].cells[1].innerHTML = bday[[name]].date;
-      i += 1;
+      let row = displayBirthday.insertRow(-1);
+      let cell1 = row.insertCell(0);
+      let cell2 = row.insertCell(1);
+      let text1 = document.createTextNode(name);
+      let text2 = document.createTextNode(bday[[name]].date);
+      cell1.appendChild(text1);
+      cell2.appendChild(text2);
+
+      // cell1.innerHTML = name;
+      // cell2.innerHTML = bday[[name]].date;
     }
 });
 
