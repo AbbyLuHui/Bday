@@ -33,6 +33,11 @@ giftSubmitButton.onclick = function(element){
       console.log("modified");
     });
   });
-    //window.location.href = "popup.html";
+  window.location.href = "popup.html";
 
+}
+
+let giftCancelButton = document.getElementById('giftCancelButton');
+giftCancelButton.onclick = function(element){
+  window.location.href = 'popup.html';
 }
