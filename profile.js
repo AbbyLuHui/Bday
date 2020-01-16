@@ -3,7 +3,10 @@
  function init(){
   D=W.document,previous=[];
   console.log(D);
+
   form=D.getElementsByTagName('form')[0];
+  name = form.getElementsByTagName('h4');
+  console.log(name);
   bts=form.getElementsByTagName('button');
   labels=form.getElementsByTagName('label');
   ipt=form.getElementsByTagName('input');
@@ -13,7 +16,7 @@
   bts[3].addEventListener('click', back, false);
   chrome.storage.local.get("current_friend", function(user){
     console.log(user);
-    labels[0].innerHTML = user.current_friend;
+    name.innerHTML = user.current_friend;
     chrome.storage.local.get("birthday", function(data){
       console.log(data.birthday[[user.current_friend]]);
     })
