@@ -31,17 +31,26 @@ chrome.storage.local.get(['birthday'], function(data){
       let row = displayBirthday.insertRow(-1);
       let cell1 = row.insertCell(0);
       let cell2 = row.insertCell(1);
-      let text1 = document.createTextNode(name);
+      let cell3 = row.insertCell(2);
+      var text1 = document.createElement('label');
+      text1.for = "chk";
+      text1.innerHTML = name;
+      text1.name = "friend";
+      var chk = document.createElement('input');
+      chk.type = "checkbox";
       let text2 = document.createTextNode(bday[[name]].date);
       cell1.appendChild(text1);
       cell2.appendChild(text2);
-
-      // cell1.innerHTML = name;
-      // cell2.innerHTML = bday[[name]].date;
     }
 });
 
 let addGift = document.getElementById('addGift');
 addGift.onclick = function(element){
   window.location.href = "addgift.html";
+}
+
+document.body.onclick = function(element){
+  if (element.target.name == "friend"){
+    window.location.href = "profile.html";
+  }
 }

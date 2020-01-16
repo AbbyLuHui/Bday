@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Modern Form</title>
+<style>
+label{display:block;}
+form input{border:none;outline:none;box-sizing:border-box;}
+form.invert input{border:1px solid rgba(0,0,0,0.2);outline:none;}
+
+form>button:nth-of-type(1){
+ color:black;display:none;
+}
+form>button:nth-of-type(2){
+ color:black;display:none;
+}
+form>button:nth-of-type(3){
+ color:black;display:inline-block;
+}
+form>button:nth-of-type(4){
+  color:black;display:inline-block;
+}
+form.invert>button:nth-of-type(1){
+ display:inline-block;
+}
+form.invert>button:nth-of-type(2){
+ display:inline-block;
+}
+form.invert>button:nth-of-type(3){
+ display:none;
+}
+form.invert>button:nth-of-type(4){
+  display:none
+}
+</style>
+</head>
+<body>
+<form>
+<label>A:<input readonly></label>
+<label>B:<input readonly></label>
+<label>C:<input readonly></label>
+<button>Save</button>
+<button>Cancel</button>
+<button>Edit</button>
+<button>Back</button>
+</form>
+<script src = "profile.js"></script>
+</body>
+</html>
