@@ -39,7 +39,7 @@ giftSubmitButton.onclick = function(element){
     chrome.storage.local.set(modified, function(){
       console.log("modified");
     });
-  });
+   });
   });
   window.location.href = "profile.html";
 

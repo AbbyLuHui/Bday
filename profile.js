@@ -5,13 +5,18 @@
   console.log(D);
   form=D.getElementsByTagName('form')[0];
   bts=form.getElementsByTagName('button');
+  labels=form.getElementsByTagName('label');
   ipt=form.getElementsByTagName('input');
   form.addEventListener('submit',save,false);
   bts[1].addEventListener('click',cancel,false);
   bts[2].addEventListener('click',edit,false);
   bts[3].addEventListener('click', back, false);
-  chrome.storage.local.get("birthday", function(data){
-    console.log(data);
+  chrome.storage.local.get("current_friend", function(user){
+    console.log(user);
+    labels[0].innerHTML = user.current_friend;
+    chrome.storage.local.get("birthday", function(data){
+      console.log(data.birthday[[user.current_friend]]);
+    })
   })
 }
  function back(e){
