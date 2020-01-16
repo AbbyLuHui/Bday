@@ -73,7 +73,7 @@ chrome.runtime.onMessage.addListener(
       chrome.storage.local.get(['birthday'], function(data){
         if (data !== 'undefined'){
           bday_data = data.birthday;
-          bday_data[[name]]={"date":curr_year_bday, "gifturl":[], "giftdescription":[]};
+          bday_data[[name]]={"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":""};
           chrome.storage.local.set({"birthday":bday_data}, function(){
             console.log("defined,", bday_data);
           });

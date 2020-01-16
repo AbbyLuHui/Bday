@@ -1,23 +1,27 @@
 (function(W){
  var D,form,bts,ipt;
+ const ph = 1;
+ const msg = 2;
  function init(){
   D=W.document,previous=[];
-  console.log(D);
   form=D.getElementsByTagName('form')[0];
   bts=form.getElementsByTagName('button');
   labels=form.getElementsByTagName('label');
   ipt=form.getElementsByTagName('input');
+
   form.addEventListener('submit',save,false);
   bts[1].addEventListener('click',cancel,false);
   bts[2].addEventListener('click',edit,false);
   bts[3].addEventListener('click', back, false);
   chrome.storage.local.get("current_friend", function(user){
-    console.log(user);
-    labels[0].innerHTML = user.current_friend;
+    //labels[0].appendChild(document.createTextNode(user.current_friend));
+    ipt[0].value = user.current_friend;
     chrome.storage.local.get("birthday", function(data){
-      console.log(data.birthday[[user.current_friend]]);
+      ipt[ph].value= data.birthday[[user.current_friend]][phone];
+      ipt[msg].value = data.birthday[[user.current_friend]][message];
     })
   })
+
 }
  function back(e){
    window.location.href = "popup.html";
@@ -26,9 +30,11 @@
   e.preventDefault();
   form.classList.remove('invert');
   var l=ipt.length;
+  console.log(ipt);
   while(l--){
    ipt[l].readOnly=true;
   };
+
   previous=[];
   //send your info here
  }
