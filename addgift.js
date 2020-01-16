@@ -22,17 +22,25 @@ let giftSubmitButton = document.getElementById('giftSubmitButton');
 console.log("started");
 giftSubmitButton.onclick = function(element){
   console.log('clicked');
-  var name = document.getElementById('name');
+  chrome.storage.local.get("current_friend", function(data){
+
+  let name = data.current_friend;
+  console.log(name);
   let url = document.getElementById('url').value;
   let description = document.getElementById('description').value;
   var modified={};
   var date="";
-  // chrome.storage.local.get([name], function(data){
-  //   modified = {"birthday":{"name":data.birthday.name, "date":data.birthday.date, "gifturl":url, "giftdescription":description}};
-  //   chrome.storage.local.set(modified, function(){
-  //     console.log("modified");
-  //   });
-  // });
+  chrome.storage.local.get("birthday", function(data){
+    modified = data;
+    console.log(modified.birthday[[name]]["gifturl"]);
+    console.log(modified.birthday[[name]]["gifturl"]);
+    modified.birthday[[name]]["gifturl"].push(url);
+    modified.birthday[[name]]["giftdescription"].push(description);
+    chrome.storage.local.set(modified, function(){
+      console.log("modified");
+    });
+  });
+  });
   window.location.href = "profile.html";
 
 }

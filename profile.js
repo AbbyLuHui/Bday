@@ -10,7 +10,10 @@
   bts[1].addEventListener('click',cancel,false);
   bts[2].addEventListener('click',edit,false);
   bts[3].addEventListener('click', back, false);
- }
+  chrome.storage.local.get("birthday", function(data){
+    console.log(data);
+  })
+}
  function back(e){
    window.location.href = "popup.html";
  }
