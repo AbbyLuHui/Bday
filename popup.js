@@ -11,7 +11,6 @@ chrome.storage.local.get(['birthday'], function(data){
       let row = displayBirthday.insertRow(-1);
       let cell1 = row.insertCell(0);
       let cell2 = row.insertCell(1);
-      let cell3 = row.insertCell(2);
       var text1 = document.createElement('label');
       text1.for = "chk";
       text1.innerHTML = name;
@@ -21,6 +20,7 @@ chrome.storage.local.get(['birthday'], function(data){
       let text2 = document.createTextNode(bday[[name]].date);
       cell1.appendChild(text1);
       cell2.appendChild(text2);
+
     }
 });
 

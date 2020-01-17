@@ -40,6 +40,7 @@
   })
 
 }
+  
  function back(e){
    window.location.href = "popup.html";
  }
