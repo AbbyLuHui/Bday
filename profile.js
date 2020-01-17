@@ -30,12 +30,10 @@
         var node = document.createElement('a');
         var linkedText = document.createTextNode(giftdescription[index]);
         node.appendChild(linkedText);
-        //node.title = giftdescription[index];
         node.href = gifturl[index];
-        console.log(node.href);
+        node.target="_blank";
         var giftlist = document.getElementById("giftlist");
         giftlist.appendChild(node);
-        console.log(giftlist);
       }
     })
   })
