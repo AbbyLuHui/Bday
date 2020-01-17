@@ -28,6 +28,7 @@
       const gifturl = data.birthday[[user.current_friend]].gifturl;
       for (var index = 0; index<giftdescription.length; index++){
         var node = document.createElement('a');
+        node.className = "list-group-item list-group-item-action";
         var linkedText = document.createTextNode(giftdescription[index]);
         node.appendChild(linkedText);
         node.href = gifturl[index];
