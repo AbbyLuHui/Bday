@@ -1,9 +1,21 @@
 <!doctype html>
 <html>
 <head>
-  <!-- <meta charset="utf-8">
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  
   <style>
-  label{display:block;}
+    body{
+      height:300px;
+      width:300px;
+    }
+    h4{
+      padding-top: 15px;
+      text-align: center;
+    }
+    label{display:block;}
   form input{border:none;outline:none;box-sizing:border-box;}
   form.invert input{border:1px solid rgba(0,0,0,0.2);outline:none;}
 
@@ -37,44 +49,33 @@
   form.invert>button:nth-of-type(5){
     display:none;
   }
-  </style> -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
-  <style>
-    body{
-      height:300px;
-      width:300px;
-    }
-    h4{
-      padding-top: 15px;
-      text-align: center;
-    }
   </style>
 </head>
 <body>
   <div class= "container">
     <form>
-      <div><h4>Name</h4></div>
+      <div><h4 id="name">Name</h4></div>
       <div class="form-group">
         <label for="phone">Phone:</label>
-        <input readonly type="phone" class="form-control" id="phone" placeholder="Enter phone" name="phone">
+        <input readonly id="phone" type="phone" class="form-control" placeholder="Enter phone" name="phone">
       </div>
       <div class="form-group">
         <label for="msg">Message:</label>
-        <textarea readonly class="form-control" rows="5" id="msg" placeholder="Enter birthday wishes"></textarea>
+        <textarea readonly id="msg" class="form-control" rows="5" placeholder="Enter birthday wishes"></textarea>
         <!-- <input type="msg" class="form-control" id="msg" placeholder="Enter birthday wishes" name="msg"> -->
       </div>
-    </form>
 
-    <div class="btn-group">
-      <button type="button" class="btn btn-light">Edit</button>
-      <button type="button" class="btn btn-light">Back</button>
-      <button type="button" class="btn btn-light">Add Gift</button>
-    </div>
+    <!-- <div class="btn-group"> -->
+      <button id= "save" type="button" class="btn btn-light">Save</button>
+      <button id= "cancel" type="button" class="btn btn-light">Cancel</button>
+      <button id="edit" type="button" class="btn btn-light">Edit</button>
+      <button id= "back" type="button" class="btn btn-light">Back</button>
+      <button id= "gift" type="button" class="btn btn-light">Add Gift</button>
+      
+    <!-- </div> -->
+  </form>
+  </br>
+</br>
   </div>
   
   <!-- <form>
