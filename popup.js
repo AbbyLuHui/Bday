@@ -20,14 +20,12 @@
 // };
 let displayBirthday = document.getElementById('displayBirthday');
 chrome.storage.local.get(['birthday'], function(data){
-    console.log(data.birthday);
+    console.log(data);
     var bday = data.birthday;
     var names = Object.keys(bday).sort(function(a,b) {
       return (new Date(bday[a].date) - new Date(bday[b].date))});
-    console.log(names);
     for (var index in names){
       let name = names[index];
-      console.log(bday[name]);
       let row = displayBirthday.insertRow(-1);
       let cell1 = row.insertCell(0);
       let cell2 = row.insertCell(1);

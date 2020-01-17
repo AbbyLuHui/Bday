@@ -32,13 +32,11 @@ giftSubmitButton.onclick = function(element){
   var date="";
   chrome.storage.local.get("birthday", function(data){
     modified = data;
-    console.log(modified.birthday[[name]]["gifturl"]);
-    console.log(modified.birthday[[name]]["gifturl"]);
+
     modified.birthday[[name]]["gifturl"].push(url);
     modified.birthday[[name]]["giftdescription"].push(description);
-    chrome.storage.local.set(modified, function(){
-      console.log("modified");
-    });
+    console.log(modified.birthday[[name]]["gifturl"]);
+    chrome.storage.local.set(modified);
    });
   });
   window.location.href = "profile.html";
