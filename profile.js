@@ -40,6 +40,14 @@
    ipt[l].readOnly=true;
   };
   msgBox.readOnly=true;
+  chrome.storage.local.get("current_friend", function(user){
+    chrome.storage.local.get("birthday", function(data){
+      var modified = data;
+      modified.birthday[[user.current_friend]].phone = ipt[ph_const].value;
+      modified.birthday[[user.current_friend]].message = msgBox.value;
+      chrome.storage.local.set(modified);
+    })
+  })
 
   previous=[];
   //send your info here
