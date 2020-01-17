@@ -1,7 +1,3 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 'use strict';
 
 chrome.runtime.onInstalled.addListener(function() {
@@ -73,7 +69,7 @@ chrome.runtime.onMessage.addListener(
       chrome.storage.local.get(['birthday'], function(data){
         if (data !== 'undefined'){
           bday_data = data.birthday;
-          bday_data[[name]]={"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":""};
+          bday_data[[name]]={"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"P", "message":"M"};
           chrome.storage.local.set({"birthday":bday_data}, function(){
             console.log("defined,", bday_data);
           });
