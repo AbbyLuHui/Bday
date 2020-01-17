@@ -24,6 +24,19 @@
     chrome.storage.local.get("birthday", function(data){
       ipt[ph_const].value= data.birthday[[user.current_friend]].phone;
       msgBox.value = data.birthday[[user.current_friend]].message;
+      const giftdescription = data.birthday[[user.current_friend]].giftdescription;
+      const gifturl = data.birthday[[user.current_friend]].gifturl;
+      for (var index = 0; index<giftdescription.length; index++){
+        var node = document.createElement('a');
+        var linkedText = document.createTextNode(giftdescription[index]);
+        node.appendChild(linkedText);
+        //node.title = giftdescription[index];
+        node.href = gifturl[index];
+        console.log(node.href);
+        var giftlist = document.getElementById("giftlist");
+        giftlist.appendChild(node);
+        console.log(giftlist);
+      }
     })
   })
 
@@ -81,3 +94,5 @@ let addGift = document.getElementById('gift');
 addGift.onclick = function(element){
   window.location.href = "addgift.html";
 }
+
+let giftList = document.getElementById("giftlist");
