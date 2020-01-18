@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+  <script src="jquery.min.js"></script>
 
   <style>
     .close {
@@ -25,7 +26,7 @@
     div.a{
       padding-top: 15px;
       text-align: center;
-      font: 30 30px/0.8 'Great Vibes', Helvetica, sans-serif;
+      font: 200 200px/0.8 'Great Vibes', Helvetica, sans-serif;
     }
     label{display:block;}
   form input{border:none;outline:none;box-sizing:border-box;}
@@ -85,7 +86,8 @@
 
       <div class="list-group">
         <label for="giftlist">Gift List:</label>
-        <a href="#" class="list-group-item list-group-item-action">First item<span class="close">&times;</span></a>
+        <!-- <a href="https://www.facebook.com/" target="_blank" class="list-group-item list-group-item-action">FB page<span class="close"></span></a> -->
+        <li href="https://www.facebook.com/" target="_blank" class="list-group-item list-group-item-action">FB page<span class="close">x</span></li>
         <div id="giftlist">
         </div>
       </div>
@@ -101,22 +103,25 @@
   </form>
   </br>
   </div>
-  <script>
+  <!-- <script nonce=12345>
+    
     $(document).ready(function(){
       $('[data-toggle="tooltip"]').tooltip();
+      $("span").click(function(){
+        $(this.parentElement).hide();
+        $(this).hide();
+      });
     });
+    var closebtns = document.getElementsByClassName("close");
+    var i;
 
-    // var closebtns = document.getElementsByClassName("close");
-    // var i;
-
-    // for (i = 0; i < closebtns.length; i++) {
-    //   closebtns[i].addEventListener("click", function() {
-    //     console.log(this.parentElement);
-    //     this.parentElement.style.display = 'none';
-    //   });
-    // }
-  </script>
+    for (i = 0; i < closebtns.length; i++) {
+      closebtns[i].addEventListener("click", function() {
+        console.log(this.parentElement);
+        this.parentElement.style.display = 'none';
+      });
+    }
+  </script> -->
   <script src = "profile.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
 </html>
