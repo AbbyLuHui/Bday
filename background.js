@@ -80,24 +80,6 @@ chrome.runtime.onMessage.addListener(
 
        fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events/', createParams)
          .then((response) => response.json()) // Transform the data into json
-<<<<<<< HEAD
-         .then(function(data) {
-           id = data.id;
-         })
-
-         chrome.storage.local.get(['birthday'], function(data){
-           if (data !== 'undefined'){
-             bday_data = data.birthday;
-             bday_data[[name]]={"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id":id};
-             chrome.storage.local.set({"birthday":bday_data}, function(){
-               console.log("defined,", bday_data);
-             });
-           } else{
-             bday_data = {"birthday":{[name]:{"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id":id}}};
-             chrome.storage.local.set(bday_data);
-             console.log("undefined,", bday_data);
-           };
-=======
          .then(function(d) {
            var id = d.id;
            chrome.storage.local.get(['birthday'], function(data){
@@ -113,25 +95,23 @@ chrome.runtime.onMessage.addListener(
                console.log("undefined,", bday_data);
              };
            });
-
->>>>>>> 7cf960b2723608c24b1dae3e2defc575f7dc1153
          });
-        chrome.storage.local.set("current_friend":name);
+        chrome.storage.local.set({"current_friend":name});
         //chrome.notifications.onButtonClicked.addListener(undoBtnClick);
     })
 });
 
-function undoBtnClick {
-  chrome.storage.local.get("current_friend", function(user){
-    chrome.storage.local.get("birthday", function(data){
-      var event_id = data.birthday[user.current_friend].id;
-      const deleteParams = {
-        headers: headers,
-        method: "DELETE",
-      };
-     fetch ('https://www.googleapis.com/calendar/v3/calendars/primary/events/' + event_id, deleteParams);
-     delete data.birthday[user.current_friend];
-     chrome.storage.local.set(data);
-    })
-  })
-}
+// function undoBtnClick {
+//   chrome.storage.local.get("current_friend", function(user){
+//     chrome.storage.local.get("birthday", function(data){
+//       var event_id = data.birthday[user.current_friend].id;
+//       const deleteParams = {
+//         headers: headers,
+//         method: "DELETE",
+//       };
+//      fetch ('https://www.googleapis.com/calendar/v3/calendars/primary/events/' + event_id, deleteParams);
+//      delete data.birthday[user.current_friend];
+//      chrome.storage.local.set(data);
+//     })
+//   })
+// }
