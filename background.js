@@ -3,24 +3,12 @@
 var contextMenusItem = {
   id: "addbirthday",
   title: "Add Birthday to Google Calendar",
-  contexts:['page'],
+  contexts:['link','image'],
 };
 
 chrome.contextMenus.create(contextMenusItem);
 
-chrome.contextMenus.onClicked.addListener(function(e){
-  console.log("addBirthday");
-  var birthday = e.target.parentElement.getAttribute("data-tooltip-content");
-  console.log(birthday);
-});
 
-// var addBirthday = function(e){
-//   console.log("addBirthday");
-//   var birthday = e.target.parentElement.getAttribute("data-tooltip-content")
-//     chrome.runtime.sendMessage({friend:birthday}, function(response){
-//       console.log(response.sent);
-//     })
-// }
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
@@ -40,15 +28,10 @@ var curr_year_bday;
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse){
+    chrome.contextMenus.onClicked.addListener(function(){
     console.log(request.friend);
     sendResponse({sent: "sent"});
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-      var opt = {
-        type: "basic",
-        title: "Primary Title",
-        message: "Primary message to display",
-        //iconUrl: "url_to_small_icon"
-      }
 
       const headers = new Headers({
         'Authorization' : 'Bearer ' + token,
@@ -117,6 +100,7 @@ chrome.runtime.onMessage.addListener(
          });
         chrome.storage.local.set({"current_friend":name});
         //chrome.notifications.onButtonClicked.addListener(undoBtnClick);
+    })
     })
 });
 
