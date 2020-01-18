@@ -1,8 +1,19 @@
 function onClickClose(e) {
-  console.log("hererrrrrrr");
   $(this.parentElement).hide();
   $(this).hide();
   e.preventDefault();
+  chrome.storage.local.get("current_friend", function(user){
+    chrome.storage.local.get("birthday", function(data){
+      console.log(e.target.parentElement.innerHTML);
+      const giftLink = e.target.parentElement.href;
+      var array = data.birthday[user.current_friend]
+      const index = array.gifturl.indexOf(giftLink);
+      array.gifturl.splice(index, 1);
+      array.giftdescription.splice(index, 1);
+      chrome.storage.local.set(data);
+    })
+  })
+
 }
 
 $(document).ready(function() {
