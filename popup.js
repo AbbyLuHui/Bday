@@ -14,10 +14,12 @@ chrome.storage.local.get(['birthday'], function(data){
       var text1 = document.createElement('label');
       text1.for = "chk";
       text1.innerHTML = name;
+      text1.name = "friend";
       // text1.name = "friend";
       var chk = document.createElement('input');
       chk.type = "checkbox";
       let text2 = document.createTextNode(bday[[name]].date);
+      text2.name = "friend";
       cell1.appendChild(text1);
       cell2.appendChild(text2);
       cell1.name = "friend";
