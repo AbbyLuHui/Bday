@@ -1,25 +1,16 @@
-// var closebtns = window.document.getElementsByClassName("close");
-// var i;
+function onClickClose(e) {
+  console.log("hererrrrrrr");
+  $(this.parentElement).hide();
+  $(this).hide();
+  e.preventDefault();
+}
 
-// for (i = 0; i < closebtns.length; i++) {
-//   closebtns[i].addEventListener("click", function() {
-//     console.log(this.parentElement);
-//     this.parentElement.style.display = 'none';
-//   });
-// }
-
-$(document).ready(function(){
-  // $('[data-toggle="tooltip"]').tooltip();
-  // $("a").click(function(){
-  //   console.log("click link");
-  //   $(this).hide();
-  // });
-  $("span").click(function(){
-    console.log("hererrrrrrr");
-    $(this.parentElement).hide();
-    $(this).hide();
+$(document).ready(function() {
+  $(".close").click(function(e){
+    onClickClose(e)
   });
 });
+
 
 (function(W){
  var D,form,bts,ipt;
@@ -66,6 +57,8 @@ $(document).ready(function(){
         node.target="_blank";
         var giftlist = document.getElementById("giftlist");
         giftlist.appendChild(node);
+
+        span.addEventListener("click", onClickClose);
         //node ex: <a href="https://www.facebook.com/" target="_blank" class="list-group-item list-group-item-action">FB page<span class="close">&times;</span></a>
       }
     })
