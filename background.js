@@ -32,7 +32,7 @@ chrome.runtime.onMessage.addListener(
 
       //ADD WHEN REQUEST.FRIEND == NULL TO ACCOUNT FOR RANDOM RIGHT CLICK ON THE PAGE
 
-      if (request.friend !== "null" && request.friend !== "UNDO"){
+      //if (request.friend !== "null" && request.friend !== "UNDO"){
       var lst = request.friend.split('(')
       name = lst[0].trim()
       var date_lst = lst[1].split(')')
@@ -64,21 +64,8 @@ chrome.runtime.onMessage.addListener(
         }
       };
 
-      //save to storage
       var bday_data;
-      chrome.storage.local.get(['birthday'], function(data){
-        if (data !== 'undefined'){
-          bday_data = data.birthday;
-          bday_data[[name]]={"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":""};
-          chrome.storage.local.set({"birthday":bday_data}, function(){
-            console.log("defined,", bday_data);
-          });
-        } else{
-          bday_data = {"birthday":{[name]:{"date":curr_year_bday, "gifturl":[], "giftdescription":[]}}};
-          chrome.storage.local.set(bday_data);
-          console.log("undefined,", bday_data);
-        };
-      });
+      var id;
 
 
       const createParams = {
@@ -87,25 +74,40 @@ chrome.runtime.onMessage.addListener(
         body: JSON.stringify(event)
       };
 
-      fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', createParams)
-        .then((response) => response.json()) // Transform the data into json
-        .then(function(data) {
-        })
-      }
+       fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events/', createParams)
+         .then((response) => response.json()) // Transform the data into json
+         .then(function(data) {
+           id = data.id;
+         })
 
-      if (request.friend == "UNDO"){
-        const deleteParams = {
-          headers: headers,
-          method: "DELETE",
-          body: JSON.stringify(event)
-        };
-        fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', createParams)
-          .then((response) => response.json()) // Transform the data into json
-          .then(function(data) {
-            console.log('deleting events response', data)
-          })
-        chrome.storage.local.remove({name})
-      }
+         chrome.storage.local.get(['birthday'], function(data){
+           if (data !== 'undefined'){
+             bday_data = data.birthday;
+             bday_data[[name]]={"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id"=id};
+             chrome.storage.local.set({"birthday":bday_data}, function(){
+               console.log("defined,", bday_data);
+             });
+           } else{
+             bday_data = {"birthday":{[name]:{"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id"=id}}};
+             chrome.storage.local.set(bday_data);
+             console.log("undefined,", bday_data);
+           };
+         });
+      //}
+
+      // if (request.friend == "UNDO"){
+      //   const deleteParams = {
+      //     headers: headers,
+      //     method: "DELETE",
+      //     body: JSON.stringify(event)
+      //   };
+      //   fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events/' + name, deleteParams)
+      //     .then((response) => response.json()) // Transform the data into json
+      //     .then(function(data) {
+      //       console.log('deleting events response', data)
+      //     })
+      //   chrome.storage.local.remove({name})
+      // }
     })
 });
 
