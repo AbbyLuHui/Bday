@@ -29,10 +29,6 @@ chrome.storage.local.get(['birthday'], function(data){
     }
 });
 
-// $(document).ready(function(){
-//     $([])
-// });
-
 document.body.onclick = function(element){
   if (element.target.name == "friend"){
     chrome.storage.local.set({"current_friend":element.target.innerHTML});
