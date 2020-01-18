@@ -22,7 +22,8 @@ chrome.storage.local.get(['birthday'], function(data){
       cell2.appendChild(text2);
       cell1.name = "friend";
       cell2.name = "friend";
-
+      text1.name = "friend";
+      text2.name = "friend";
     }
 });
 
