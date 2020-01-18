@@ -3,7 +3,8 @@
 var contextMenusItem = {
   id: "addbirthday",
   title: "Add Birthday to Google Calendar",
-  contexts:['link','image'],
+  contexts:['link'],
+  documentUrlPatterns: ["https://www.facebook.com/events/birthdays/"]
 };
 
 chrome.contextMenus.create(contextMenusItem);
