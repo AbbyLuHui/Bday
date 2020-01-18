@@ -1,5 +1,27 @@
 'use strict';
 
+var contextMenusItem = {
+  id: "addbirthday",
+  title: "Add Birthday to Google Calendar",
+  contexts:['page'],
+};
+
+chrome.contextMenus.create(contextMenusItem);
+
+chrome.contextMenus.onClicked.addListener(function(e){
+  console.log("addBirthday");
+  var birthday = e.target.parentElement.getAttribute("data-tooltip-content");
+  console.log(birthday);
+});
+
+// var addBirthday = function(e){
+//   console.log("addBirthday");
+//   var birthday = e.target.parentElement.getAttribute("data-tooltip-content")
+//     chrome.runtime.sendMessage({friend:birthday}, function(response){
+//       console.log(response.sent);
+//     })
+// }
+
 chrome.runtime.onInstalled.addListener(function() {
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
       chrome.declarativeContent.onPageChanged.addRules([{
