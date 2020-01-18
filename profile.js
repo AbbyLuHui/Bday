@@ -41,6 +41,7 @@ $(document).ready(function(){
   bts[1].addEventListener('click',cancel,false);
   bts[2].addEventListener('click',edit,false);
   bts[3].addEventListener('click', back, false);
+  bts[5].addEventListener('click', del, false)
   chrome.storage.local.get("current_friend", function(user){
     var prof_name = D.getElementById("profile_name");
     prof_name.innerHTML = user.current_friend;
@@ -53,7 +54,7 @@ $(document).ready(function(){
         var node = document.createElement('a');
         node.className = "list-group-item list-group-item-action";
         var linkedText = document.createTextNode(giftdescription[index]);
-        
+
         var span = document.createElement('SPAN');
         span.className = "close";
         var x = document.createTextNode("x");
@@ -71,9 +72,32 @@ $(document).ready(function(){
   })
 
 }
-  
+
  function back(e){
    window.location.href = "popup.html";
+ }
+ function del(e){
+   chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+
+     const headers = new Headers({
+       'Authorization' : 'Bearer ' + token,
+       'Content-Type': 'application/json'
+     })
+     chrome.storage.local.get("current_friend", function(user){
+       chrome.storage.local.get("birthday", function(data){
+         var event_id = data.birthday[user.current_friend].id;
+         const deleteParams = {
+           headers: headers,
+           method: "DELETE",
+         };
+        fetch ('https://www.googleapis.com/calendar/v3/calendars/primary/events/' + event_id, deleteParams);
+        delete data.birthday[user.current_friend];
+        chrome.storage.local.set(data);
+        window.location.href = "popup.html";
+
+       })
+     })
+   })
  }
  function save(e){
   e.preventDefault();
