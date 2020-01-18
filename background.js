@@ -24,6 +24,12 @@ chrome.runtime.onMessage.addListener(
     console.log(request.friend)
     sendResponse({sent: "sent"});
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+      var opt = {
+        type: "basic",
+        title: "Primary Title",
+        message: "Primary message to display",
+        //iconUrl: "url_to_small_icon"
+      }
 
       const headers = new Headers({
         'Authorization' : 'Bearer ' + token,
@@ -91,28 +97,22 @@ chrome.runtime.onMessage.addListener(
            });
 
          });
-    //}
-
-      // if (request.friend == "UNDO"){
-      //   const deleteParams = {
-      //     headers: headers,
-      //     method: "DELETE",
-      //     body: JSON.stringify(event)
-      //   };
-      //   fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events/' + name, deleteParams)
-      //     .then((response) => response.json()) // Transform the data into json
-      //     .then(function(data) {
-      //       console.log('deleting events response', data)
-      //     })
-      //   chrome.storage.local.remove({name})
-      // }
+        chrome.storage.local.set("current_friend":name);
+        //chrome.notifications.onButtonClicked.addListener(undoBtnClick);
     })
 });
 
-//const queryParams = { headers };
-
-//fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', queryParams)
-//  .then((response) => response.json()) // Transform the data into json
-//  .then(function(data) {
-//    console.log('fetching events response', data)
-//  })
+function undoBtnClick {
+  chrome.storage.local.get("current_friend", function(user){
+    chrome.storage.local.get("birthday", function(data){
+      var event_id = data.birthday[user.current_friend].id;
+      const deleteParams = {
+        headers: headers,
+        method: "DELETE",
+      };
+     fetch ('https://www.googleapis.com/calendar/v3/calendars/primary/events/' + event_id, deleteParams);
+     delete data.birthday[user.current_friend];
+     chrome.storage.local.set(data);
+    })
+  })
+}
