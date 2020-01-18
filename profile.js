@@ -90,11 +90,13 @@ $(document).ready(function(){
            headers: headers,
            method: "DELETE",
          };
-        fetch ('https://www.googleapis.com/calendar/v3/calendars/primary/events/' + event_id, deleteParams);
-        delete data.birthday[user.current_friend];
-        chrome.storage.local.set(data);
-        window.location.href = "popup.html";
-
+        console.log(event_id);
+        fetch ('https://www.googleapis.com/calendar/v3/calendars/primary/events/' + event_id, deleteParams)
+        .then(function(d) {
+          delete data.birthday[user.current_friend];
+          chrome.storage.local.set(data);
+          window.location.href = "popup.html";
+        })
        })
      })
    })
