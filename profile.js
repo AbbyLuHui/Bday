@@ -18,6 +18,7 @@
   bts[1].addEventListener('click',cancel,false);
   bts[2].addEventListener('click',edit,false);
   bts[3].addEventListener('click', back, false);
+  bts[4].addEventListener('click', del, false)
   chrome.storage.local.get("current_friend", function(user){
     var prof_name = D.getElementById("profile_name");
     prof_name.innerHTML = user.current_friend;
@@ -40,9 +41,19 @@
   })
 
 }
-  
+
  function back(e){
    window.location.href = "popup.html";
+ }
+ function del(e){
+   chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+
+     const headers = new Headers({
+       'Authorization' : 'Bearer ' + token,
+       'Content-Type': 'application/json'
+     })
+
+   }
  }
  function save(e){
   e.preventDefault();

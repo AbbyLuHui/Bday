@@ -64,36 +64,34 @@ chrome.runtime.onMessage.addListener(
         }
       };
 
-      var bday_data;
-      var id;
-
-
       const createParams = {
         headers: headers,
         method: "POST",
         body: JSON.stringify(event)
       };
 
+
+
        fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events/', createParams)
          .then((response) => response.json()) // Transform the data into json
-         .then(function(data) {
-           id = data.id;
-         })
+         .then(function(d) {
+           var id = d.id;
+           chrome.storage.local.get(['birthday'], function(data){
+              if (data !== 'undefined'){
+               var bday_data = data.birthday;
+               bday_data[name]={"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id":id};
+               chrome.storage.local.set({"birthday":bday_data}, function(){
+                 console.log("defined,", bday_data);
+               });
+              } else{
+               var bday_data={"birthday":{[name]:{"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id":id}}};
+               chrome.storage.local.set(bday_data);
+               console.log("undefined,", bday_data);
+             };
+           });
 
-         chrome.storage.local.get(['birthday'], function(data){
-           if (data !== 'undefined'){
-             bday_data = data.birthday;
-             bday_data[[name]]={"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id"=id};
-             chrome.storage.local.set({"birthday":bday_data}, function(){
-               console.log("defined,", bday_data);
-             });
-           } else{
-             bday_data = {"birthday":{[name]:{"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id"=id}}};
-             chrome.storage.local.set(bday_data);
-             console.log("undefined,", bday_data);
-           };
          });
-      //}
+    //}
 
       // if (request.friend == "UNDO"){
       //   const deleteParams = {
