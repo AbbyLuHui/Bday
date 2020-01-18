@@ -1,5 +1,19 @@
 'use strict';
 
+chrome.contextMenus.create({
+  id: "addbirthday",
+  title: "Add Birthday to Google Calendar", 
+  contexts:["selection"], 
+  onclick: addBirthday
+});
+
+function addBirthday(e){
+  var birthday = e.target.parentElement.getAttribute("data-tooltip-content")
+    chrome.runtime.sendMessage({friend:birthday}, function(response){
+      console.log(response.sent);
+    })
+}
+
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.local.set({color: '#3aa757'}, function() {
     console.log("The color is green.");
@@ -21,7 +35,7 @@ var curr_year_bday;
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse){
-    console.log(request.friend)
+    console.log(request.friend);
     sendResponse({sent: "sent"});
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
       var opt = {
