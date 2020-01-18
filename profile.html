@@ -5,16 +5,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
 
   <style>
-
+    .close {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      right: 0%;
+      padding: 12px 16px;
+      transform: translate(0%, -50%);
+    }
+    .close:hover {background: #bbb;}
     body{
       height:300px;
       width:300px;
+      font-family: fantasy;
     }
-    h4{
+    div.a{
       padding-top: 15px;
       text-align: center;
+      font: 30 30px/0.8 'Great Vibes', Helvetica, sans-serif;
     }
     label{display:block;}
   form input{border:none;outline:none;box-sizing:border-box;}
@@ -35,6 +46,9 @@
   form>button:nth-of-type(5){
     color:black;display:inline-block;
   }
+  form>button:nth-of-type(6){
+    color:black;display:inline-block;
+  }
   form.invert>button:nth-of-type(1){
   display:inline-block;
   }
@@ -50,12 +64,15 @@
   form.invert>button:nth-of-type(5){
     display:none;
   }
+  form.invert>button:nth-of-type(6){
+    display:none;
+  }
   </style>
 </head>
 <body>
   <div class= "container">
     <form>
-      <div><h4 id="profile_name">Name</h4></div>
+      <div class='a'><h4 id="profile_name">Name</h4></div>
       <div class="form-group">
         <label for="phone">Phone:</label>
         <input readonly id="phone" type="phone" class="form-control" placeholder="Enter phone" name="phone">
@@ -68,6 +85,7 @@
 
       <div class="list-group">
         <label for="giftlist">Gift List:</label>
+        <a href="#" class="list-group-item list-group-item-action">First item<span class="close">&times;</span></a>
         <div id="giftlist">
         </div>
       </div>
@@ -79,6 +97,7 @@
       <button id= "back" type="button" class="btn btn-light btn-sm">Back</button>
       <button id= "gift" type="button" class="btn btn-light btn-sm" data-toggle="tooltip" data-placement="top" title="add url and tag">Add Gift</button>
       <button id="delete" type="button" class="btn btn-light btn-sm" data-toggle="tooltip" data-placement="top" title="delete calendar event and profile">Delete</button>
+
   </form>
   </br>
   </div>
@@ -86,7 +105,18 @@
     $(document).ready(function(){
       $('[data-toggle="tooltip"]').tooltip();
     });
-    </script>
+
+    // var closebtns = document.getElementsByClassName("close");
+    // var i;
+
+    // for (i = 0; i < closebtns.length; i++) {
+    //   closebtns[i].addEventListener("click", function() {
+    //     console.log(this.parentElement);
+    //     this.parentElement.style.display = 'none';
+    //   });
+    // }
+  </script>
   <script src = "profile.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
 </html>
