@@ -95,9 +95,8 @@ chrome.runtime.onMessage.addListener(
                console.log("undefined,", bday_data);
              };
            });
-
          });
-        chrome.storage.local.set({"current_friend": name});
+        chrome.storage.local.set({"current_friend":name});
         //chrome.notifications.onButtonClicked.addListener(undoBtnClick);
     })
 });
