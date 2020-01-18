@@ -20,20 +20,20 @@ chrome.storage.local.get(['birthday'], function(data){
       let text2 = document.createTextNode(bday[[name]].date);
       cell1.appendChild(text1);
       cell2.appendChild(text2);
-      cell1.name = "friend";
-      cell2.name = "friend";
-      text1.name = "friend";
-      text2.name = "friend";
+      cell1.className += "friend";
+      cell2.className += "friend";
+      text1.className += "friend";
+      text2.className += "friend";
+      cell1.name = name;
+      cell2.name = name;
+      text1.name = name;
+      text2.name = name;
     }
 });
 
-// $(document).ready(function(){
-//     $([])
-// });
-
 document.body.onclick = function(element){
-  if (element.target.name == "friend"){
-    chrome.storage.local.set({"current_friend":element.target.innerHTML});
+  if (element.target.classList.contains("friend")){
+    chrome.storage.local.set({"current_friend":element.target.name});
     window.location.href = "profile.html";
   }
 }
