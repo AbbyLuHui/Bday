@@ -31,9 +31,9 @@ var curr_year_bday;
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse){
     chrome.contextMenus.onClicked.addListener(function(){
-    console.log(request.friend);
-    sendResponse({sent: "sent"});
-    chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+      console.log(request.friend);
+      sendResponse({sent: "sent"});
+      chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
 
       const headers = new Headers({
         'Authorization' : 'Bearer ' + token,
