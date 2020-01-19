@@ -1,2 +1,2 @@
-# Bday
-Birthday Chrome Extension!
+# Year++
+Birthday Chrome Extension
