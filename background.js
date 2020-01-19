@@ -12,6 +12,7 @@ chrome.contextMenus.create(contextMenusItem);
 
 
 chrome.runtime.onInstalled.addListener(function() {
+  chrome.storage.local.set({"birthday":{}});
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
       chrome.declarativeContent.onPageChanged.addRules([{
         conditions: [new chrome.declarativeContent.PageStateMatcher({
@@ -62,12 +63,12 @@ chrome.runtime.onMessage.addListener(
             'date': curr_year_bday
           },
           'recurrence': [
-            'RRULE:FREQ=YEARLY;COUNT=2'
+            'RRULE:FREQ=YEARLY;'
           ],
           'reminders': {
             'useDefault': false,
             'overrides': [
-              {'method': 'email', 'minutes': 72 * 60},
+              {'method': 'email', 'minutes': 3 * 24 * 60},
               {'method': 'popup', 'minutes': 10}
             ]
           }
@@ -86,23 +87,26 @@ chrome.runtime.onMessage.addListener(
           .then(function(d) {
             var id = d.id;
             chrome.storage.local.get(['birthday'], function(data){
+                console.log("data",data);
                 if (data !== 'undefined'){
-                var bday_data = data.birthday;
-                bday_data[name]={"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id":id};
-                chrome.storage.local.set({"birthday":bday_data}, function(){
-                  console.log("defined,", bday_data);
-                });
+                  var bday_data = data.birthday;
+                  console.log(data);
+                  console.log(data.birthday);
+                  bday_data[name]={"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id":id};
+                  chrome.storage.local.set({"birthday":bday_data}, function(){
+                    console.log("defined,", bday_data);
+                  });
                 } else{
-                var bday_data={"birthday":{[name]:{"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id":id}}};
-                chrome.storage.local.set(bday_data);
-                console.log("undefined,", bday_data);
-              };
+                  var bday_data={"birthday":{[name]:{"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id":id}}};
+                  chrome.storage.local.set(bday_data);
+                  console.log("undefined,", bday_data);
+                };
             });
           });
           chrome.storage.local.set({"current_friend":name});
           //chrome.notifications.onButtonClicked.addListener(undoBtnClick);
-      })
-    });
+    })
+    })
 });
 
 // function undoBtnClick {
