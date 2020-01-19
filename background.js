@@ -30,7 +30,9 @@ var curr_year_bday;
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse){
+    console.log("here");
     chrome.contextMenus.onClicked.addListener(function(){
+      console.log("here2");
       console.log(request.friend);
       sendResponse({sent: "sent"});
       chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
@@ -76,7 +78,8 @@ chrome.runtime.onMessage.addListener(
         method: "POST",
         body: JSON.stringify(event)
       };
-
+      
+      console.log("createParams boday: ", createParams.body);
 
        chrome.storage.local.get(['birthday'], function(data){
          console.log(name in data.birthday);
@@ -103,4 +106,5 @@ chrome.runtime.onMessage.addListener(
         //chrome.notifications.onButtonClicked.addListener(undoBtnClick);
     })
     })
+    chrome.contextMenus.onClicked.addListener((function(){}))
 });
