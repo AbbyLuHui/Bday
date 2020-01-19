@@ -12,6 +12,7 @@ chrome.contextMenus.create(contextMenusItem);
 
 
 chrome.runtime.onInstalled.addListener(function() {
+  chrome.storage.local.set({"birthday":{}});
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
       chrome.declarativeContent.onPageChanged.addRules([{
         conditions: [new chrome.declarativeContent.PageStateMatcher({
@@ -38,9 +39,6 @@ chrome.runtime.onMessage.addListener(
         'Authorization' : 'Bearer ' + token,
         'Content-Type': 'application/json'
       })
-
-      //ADD WHEN REQUEST.FRIEND == NULL TO ACCOUNT FOR RANDOM RIGHT CLICK ON THE PAGE
-
       //if (request.friend !== "null" && request.friend !== "UNDO"){
       var lst = request.friend.split('(')
       name = lst[0].trim()
@@ -104,18 +102,3 @@ chrome.runtime.onMessage.addListener(
     })
     })
 });
-
-// function undoBtnClick {
-//   chrome.storage.local.get("current_friend", function(user){
-//     chrome.storage.local.get("birthday", function(data){
-//       var event_id = data.birthday[user.current_friend].id;
-//       const deleteParams = {
-//         headers: headers,
-//         method: "DELETE",
-//       };
-//      fetch ('https://www.googleapis.com/calendar/v3/calendars/primary/events/' + event_id, deleteParams);
-//      delete data.birthday[user.current_friend];
-//      chrome.storage.local.set(data);
-//     })
-//   })
-// }
