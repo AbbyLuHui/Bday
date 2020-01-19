@@ -1,8 +1,7 @@
 'use strict';
 
 let displayBirthday = document.getElementById('displayBirthday');
-//chrome.storage.local.set({"birthday":{}});
-chrome.storage.local.get(['birthday'], function(data){
+chrome.storage.sync.get(['birthday'], function(data){
     var bday = data.birthday;
     var names = Object.keys(bday).sort(function(a,b) {
       return (new Date(bday[a].date) - new Date(bday[b].date))});
@@ -35,7 +34,7 @@ chrome.storage.local.get(['birthday'], function(data){
 
 document.body.onclick = function(element){
   if (element.target.classList.contains("friend")){
-    chrome.storage.local.set({"current_friend":element.target.name});
+    chrome.storage.sync.set({"current_friend":element.target.name});
     window.location.href = "profile.html";
   }
 }

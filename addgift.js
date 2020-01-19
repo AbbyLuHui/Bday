@@ -4,7 +4,7 @@ let giftSubmitButton = document.getElementById('giftSubmitButton');
 console.log("started");
 giftSubmitButton.onclick = function(element){
   console.log('clicked');
-  chrome.storage.local.get("current_friend", function(data){
+  chrome.storage.sync.get("current_friend", function(data){
 
   let name = data.current_friend;
   console.log(name);
@@ -12,13 +12,13 @@ giftSubmitButton.onclick = function(element){
   let description = document.getElementById('description').value;
   var modified={};
   var date="";
-  chrome.storage.local.get("birthday", function(data){
+  chrome.storage.sync.get("birthday", function(data){
     modified = data;
 
     modified.birthday[[name]]["gifturl"].push(url);
     modified.birthday[[name]]["giftdescription"].push(description);
     console.log(modified.birthday[[name]]["gifturl"]);
-    chrome.storage.local.set(modified);
+    chrome.storage.sync.set(modified);
    });
   });
   window.location.href = "profile.html";

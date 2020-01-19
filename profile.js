@@ -2,15 +2,15 @@ function onClickClose(e) {
   $(this.parentElement).hide();
   $(this).hide();
   e.preventDefault();
-  chrome.storage.local.get("current_friend", function(user){
-    chrome.storage.local.get("birthday", function(data){
+  chrome.storage.sync.get("current_friend", function(user){
+    chrome.storage.sync.get("birthday", function(data){
       console.log(e.target.parentElement.innerHTML);
       const giftLink = e.target.parentElement.href;
       var array = data.birthday[user.current_friend]
       const index = array.gifturl.indexOf(giftLink);
       array.gifturl.splice(index, 1);
       array.giftdescription.splice(index, 1);
-      chrome.storage.local.set(data);
+      chrome.storage.sync.set(data);
     })
   })
 
@@ -44,10 +44,10 @@ $(document).ready(function() {
   bts[2].addEventListener('click',edit,false);
   bts[3].addEventListener('click', back, false);
   bts[5].addEventListener('click', del, false)
-  chrome.storage.local.get("current_friend", function(user){
+  chrome.storage.sync.get("current_friend", function(user){
     var prof_name = D.getElementById("profile_name");
     prof_name.innerHTML = user.current_friend;
-    chrome.storage.local.get("birthday", function(data){
+    chrome.storage.sync.get("birthday", function(data){
       ipt[ph_const].value= data.birthday[[user.current_friend]].phone;
       msgBox.value = data.birthday[[user.current_friend]].message;
       const giftdescription = data.birthday[[user.current_friend]].giftdescription;
@@ -87,8 +87,8 @@ $(document).ready(function() {
        'Authorization' : 'Bearer ' + token,
        'Content-Type': 'application/json'
      })
-     chrome.storage.local.get("current_friend", function(user){
-       chrome.storage.local.get("birthday", function(data){
+     chrome.storage.sync.get("current_friend", function(user){
+       chrome.storage.sync.get("birthday", function(data){
          var event_id = data.birthday[user.current_friend].id;
          const deleteParams = {
            headers: headers,
@@ -98,7 +98,7 @@ $(document).ready(function() {
         fetch ('https://www.googleapis.com/calendar/v3/calendars/primary/events/' + event_id, deleteParams)
         .then(function(d) {
           delete data.birthday[user.current_friend];
-          chrome.storage.local.set(data);
+          chrome.storage.sync.set(data);
           window.location.href = "popup.html";
         })
        })
@@ -114,12 +114,12 @@ $(document).ready(function() {
    ipt[l].readOnly=true;
   };
   msgBox.readOnly=true;
-  chrome.storage.local.get("current_friend", function(user){
-    chrome.storage.local.get("birthday", function(data){
+  chrome.storage.sync.get("current_friend", function(user){
+    chrome.storage.sync.get("birthday", function(data){
       var modified = data;
       modified.birthday[[user.current_friend]].phone = ipt[ph_const].value;
       modified.birthday[[user.current_friend]].message = msgBox.value;
-      chrome.storage.local.set(modified);
+      chrome.storage.sync.set(modified);
     })
   })
 
