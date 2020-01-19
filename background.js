@@ -1,7 +1,7 @@
 'use strict';
 
 var contextMenusItem = {
-  id: "addbirthday",
+  id: "addbirthday1",
   title: "Add Birthday to Google Calendar",
   contexts:['link'],
   documentUrlPatterns: ["https://www.facebook.com/events/birthdays/"]
@@ -78,12 +78,13 @@ chrome.runtime.onMessage.addListener(
       };
 
 
-
-       fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events/', createParams)
-         .then((response) => response.json()) // Transform the data into json
-         .then(function(d) {
-           var id = d.id;
-           chrome.storage.local.get(['birthday'], function(data){
+       chrome.storage.local.get(['birthday'], function(data){
+         console.log(name in data.birthday);
+         if (!(name in data.birthday)){
+           fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events/', createParams)
+             .then((response) => response.json()) // Transform the data into json
+             .then(function(d) {
+              var id = d.id;
               if (data !== 'undefined'){
                var bday_data = data.birthday;
                bday_data[name]={"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id":id};
@@ -96,6 +97,7 @@ chrome.runtime.onMessage.addListener(
                console.log("undefined,", bday_data);
              };
            });
+         };
          });
         chrome.storage.local.set({"current_friend":name});
         //chrome.notifications.onButtonClicked.addListener(undoBtnClick);
