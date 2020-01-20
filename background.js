@@ -3,8 +3,9 @@
 var contextMenusItem = {
   id: "addbirthday",
   title: "Add Birthday to Google Calendar",
-  contexts:['link'],
-  documentUrlPatterns: ["https://www.facebook.com/events/birthdays/"]
+  contexts:['image'],
+  documentUrlPatterns: ["https://www.facebook.com/events/birthdays/"],
+  targetUrlPatterns: ["https://scontent-lga3-1.xx.fbcdn.net/*"]
 };
 
 chrome.contextMenus.create(contextMenusItem);
@@ -66,7 +67,8 @@ function contextOnClick(e){
     var d = new Date()
     var curr_year = d.getFullYear()
 
-    var daytoInt = {"Sunday":0, "Monday":1, "Tuesday":2, "Wednesday":3, "Thursday":4, "Friday":5, "Saturday":6};
+    var daytoInt = {"Sunday":0, "Monday":1, "Tuesday":2, "Wednesday":3,
+                    "Thursday":4, "Friday":5, "Saturday":6};
     if (month in daytoInt){
       const today = d.getDay();
       var diff = Math.abs(today - daytoInt[[month]]);
@@ -78,15 +80,16 @@ function contextOnClick(e){
       day = d.getDate();
     }
 
-    curr_year_bday = curr_year+'-'+month+'-'+day
+    curr_year_bday = month+' / '+day
+    var calendar_year_bday = curr_year+'-'+month+'-'+day
 
     event = {
       'summary': name + "'s Birthday",
       'start': {
-        'date': curr_year_bday
+        'date': calendar_year_bday
       },
       'end': {
-        'date': curr_year_bday
+        'date': calendar_year_bday
       },
       'recurrence': [
          'RRULE:FREQ=YEARLY'
