@@ -11,7 +11,13 @@ chrome.contextMenus.create(contextMenusItem);
 
 
 chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.sync.set({"birthday":{}});
+  chrome.storage.sync.get(['birthday'], function(data){
+    console.log(data.birthday);
+    if (!("birthday" in data)){
+      chrome.storage.sync.set({"birthday":{}})
+      console.log("Set");
+    }
+  })
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
       chrome.declarativeContent.onPageChanged.addRules([{
         conditions: [new chrome.declarativeContent.PageStateMatcher({
@@ -93,7 +99,7 @@ function contextOnClick(e){
        .then(function(d) {
          var id = d.id;
          chrome.storage.sync.get(['birthday'], function(data){
-            if (data !== 'undefined'){
+            if (data.birthday !== 'undefined'){
              var bday_data = data.birthday;
              bday_data[name]={"date":curr_year_bday, "gifturl":[], "giftdescription":[], "phone":"", "message":"", "id":id};
              chrome.storage.sync.set({"birthday":bday_data}, function(){

@@ -7,7 +7,6 @@
     "client_id":"10472574227-62ph61h41otgj5phdrna77qvvpn9roug.apps.googleusercontent.com",
     "scopes": ["https://www.googleapis.com/auth/calendar"]
   },
-  "options_page":"options.html",
   "content_scripts":[
     {
       "matches":[
@@ -20,7 +19,7 @@
     "scripts": ["background.js"],
     "persistent": false
   },
-  
+
   "browser_action":{
     "default_popup":"popup.html",
     "default_icon":{
