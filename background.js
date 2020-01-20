@@ -66,6 +66,18 @@ function contextOnClick(e){
     var d = new Date()
     var curr_year = d.getFullYear()
 
+    var daytoInt = {"Sunday":0, "Monday":1, "Tuesday":2, "Wednesday":3, "Thursday":4, "Friday":5, "Saturday":6};
+    if (month in daytoInt){
+      const today = d.getDay();
+      var diff = Math.abs(today - daytoInt[[month]]);
+      if (diff == 0){
+        diff = 7
+      }
+      d.setDate(d.getDate() + diff);
+      month = d.getMonth()+1;
+      day = d.getDate();
+    }
+
     curr_year_bday = curr_year+'-'+month+'-'+day
 
     event = {
@@ -77,7 +89,7 @@ function contextOnClick(e){
         'date': curr_year_bday
       },
       'recurrence': [
-         'RRULE:FREQ=YEARLY;COUNT=2'
+         'RRULE:FREQ=YEARLY'
       ],
       'reminders': {
         'useDefault': false,
