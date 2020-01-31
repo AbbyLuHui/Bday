@@ -8,10 +8,11 @@ var contextMenusItem = {
   targetUrlPatterns: ["https://scontent-lga3-1.xx.fbcdn.net/*"]
 };
 
-chrome.contextMenus.create(contextMenusItem);
+
 
 
 chrome.runtime.onInstalled.addListener(function() {
+  chrome.contextMenus.create(contextMenusItem);
   chrome.storage.sync.get(['birthday'], function(data){
     console.log(data.birthday);
     if (!("birthday" in data)){
@@ -19,15 +20,7 @@ chrome.runtime.onInstalled.addListener(function() {
       console.log("Set");
     }
   })
-  chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-      chrome.declarativeContent.onPageChanged.addRules([{
-        conditions: [new chrome.declarativeContent.PageStateMatcher({
-          pageUrl: {hostEquals: 'developer.chrome.com'},
-        })
-        ],
-            actions: [new chrome.declarativeContent.ShowPageAction()]
-      }]);
-    });
+  chrome.identity.getAuthToken({ 'interactive': true });
 });
 
 var event;
