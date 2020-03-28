@@ -2,3 +2,4 @@ credentials.json
 .config.js
 .DS_Store
 .env
+sendgrid.env
