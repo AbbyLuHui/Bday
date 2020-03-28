@@ -1,6 +1,6 @@
 {
   "name": "Year++",
-  "version": "1.0",
+  "version": "1.0.1",
   "description": "Auto save Facebook friends' birthdays to Google Calendar and manage customized gift list",
   "permissions":["contextMenus", "identity","storage"],
   "oauth2":{
