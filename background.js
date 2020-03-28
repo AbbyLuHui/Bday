@@ -8,10 +8,11 @@ var contextMenusItem = {
   targetUrlPatterns: ["https://scontent-lga3-1.xx.fbcdn.net/*"]
 };
 
-chrome.contextMenus.create(contextMenusItem);
+
 
 
 chrome.runtime.onInstalled.addListener(function() {
+  chrome.contextMenus.create(contextMenusItem);
   chrome.storage.sync.get(['birthday'], function(data){
     console.log(data.birthday);
     if (!("birthday" in data)){
@@ -19,6 +20,7 @@ chrome.runtime.onInstalled.addListener(function() {
       console.log("Set");
     }
   })
+  chrome.identity.getAuthToken({ 'interactive': true });
 });
 
 var event;
