@@ -38,3 +38,13 @@ document.body.onclick = function(element){
     window.location.href = "profile.html";
   }
 }
+
+$('#add_fb').click(function(event){
+    event.preventDefault()
+})
+
+$('#add_man').click(function(event){
+  event.preventDefault()
+  console.log('clicked add mannually')
+  window.location.href = 'add_bday.html'
+})

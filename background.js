@@ -9,8 +9,6 @@ var contextMenusItem = {
 };
 
 
-
-
 chrome.runtime.onInstalled.addListener(function() {
   chrome.contextMenus.create(contextMenusItem);
   chrome.storage.sync.get(['birthday'], function(data){

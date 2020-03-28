@@ -1,6 +1,6 @@
 {
   "name": "Year++",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Auto save Facebook friends' birthdays to Google Calendar and manage customized gift list",
   "permissions":["contextMenus", "identity","storage"],
   "oauth2":{
@@ -26,14 +26,14 @@
       "16": "images/icons8-birthday-16.png",
       "32": "images/icons8-birthday-32.png",
       "48": "images/icons8-birthday-48.png",
-      "128": "images/icons8-birthday-100.png"
+      "128": "images/icons8-birthday-128.png"
     }
   },
   "icons": {
     "16": "images/icons8-birthday-16.png",
     "32": "images/icons8-birthday-32.png",
     "48": "images/icons8-birthday-48.png",
-    "128": "images/icons8-birthday-100.png"
+    "128": "images/icons8-birthday-128.png"
   },
   "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
   "manifest_version": 2
