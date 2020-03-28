@@ -5,7 +5,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-      <script src="jquery.min.js"></script>
+      <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <style>
       tr.a{
         font: 30 30px/0.8 'Great Vibes', Helvetica, sans-serif;
@@ -14,6 +15,9 @@
         height:300px;
         width:300px;
         font-family: fantasy;
+      }
+      button{
+        margin-right: 10px;
       }
     </style>
   </head>
@@ -28,6 +32,10 @@
         </tr>
       </thread>
     </table>
+    <button type="button" class="btn btn-light btn-sm" id='add_fb'>
+      <a href = 'https://www.facebook.com/events/birthdays/'>Add from Facebook</a>
+    </button>
+    <button type="button" class="btn btn-light btn-sm" id='add_man'>Add Mannually</button>
     <script src="popup.js"></script>
   </body>
 </html>
