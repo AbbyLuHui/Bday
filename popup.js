@@ -41,6 +41,8 @@ document.body.onclick = function(element){
 
 $('#add_fb').click(function(event){
     event.preventDefault()
+    window.open("https://www.facebook.com/events/birthdays/");
+    
 })
 
 $('#add_man').click(function(event){

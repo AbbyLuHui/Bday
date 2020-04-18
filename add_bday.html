@@ -4,19 +4,22 @@
         <meta charset="utf-8">
         <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-        <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename = 'search.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+       
         <script src="add_bday.js"></script>
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        
         <style>
             body{
                 height:300px;
                 width:300px;
                 font-family: fantasy;
+                padding-top: 20px;
             }
             h4{
                 font: 30 30px/0.8 'Great Vibes', Helvetica, sans-serif;
+                text-align: center;
             }
 
             button{
@@ -26,20 +29,32 @@
     </head>
 
     <body>
+<<<<<<< HEAD
         <h4>Add Birthday</h4>
 
+=======
+        <div class='container'>
+            <h4>Add Birthday</h4>
+            <form>
+                <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                <label for="bday">Birthday</label>
+                <input type="date" class="form-control" id="bday">
+                </div>
 
-        <form>
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" class="form-control" id="name" placeholder="Enter name">
-            </div>
-            <div class="form-group">
-              <label for="bday">Birthday</label>
-              <input type="date" class="form-control" id="bday">
-            </div>
-            <button type="button" class="btn btn-light btn-sm" id='back'>Back</button>
-            <button type="submit" class="btn btn-light btn-sm" id='submit'>Submit</button>
-          </form>
+                <!-- <ul class="pager">
+                    <li class="previous"><a href="popup.html">Back</a></li>
+                    <li class="next"><a href="#">Submit</a></li>
+                </ul> -->
+
+                <button type="button" class="btn btn-light btn-sm" id='back'>Back</button>
+                <button type="submit" class="btn btn-light btn-sm" id='submit'>Submit</button>
+            </form>
+>>>>>>> 3d39a9642bf7d22efebff3820a98d6993a6821e6
+
+        </div>
     </body>
 </html>
