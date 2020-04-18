@@ -25,19 +25,19 @@ var event;
 var lst;
 var name;
 var curr_year_bday;
-var temp;
+var temp_bday;
 var calendar_year_bday;
 
 chrome.runtime.onMessage.addListener(
    function(request, sender, sendResponse){
      console.log(request.friend);
      sendResponse({sent: "sent"});
-     temp = request.friend;
+     temp_bday = request.friend;
 });
 
 chrome.contextMenus.onClicked.addListener(function(){
   chrome.storage.sync.get(function(data){
-    lst = temp.split('(')
+    lst = temp_bday.split('(')
     name = lst[0].trim()
     if (!(name in data.birthday)){
       contextOnClick();
