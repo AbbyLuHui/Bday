@@ -5,7 +5,7 @@ var contextMenusItem = {
   title: "Add Birthday to Google Calendar",
   contexts:['image'],
   documentUrlPatterns: ["https://www.facebook.com/events/birthdays/"],
-  targetUrlPatterns: ["https://scontent-lga3-1.xx.fbcdn.net/*"]
+  targetUrlPatterns: ["https://*.fbcdn.net/*"]
 };
 
 
@@ -26,6 +26,8 @@ var lst;
 var name;
 var curr_year_bday;
 var temp;
+var calendar_year_bday;
+
 chrome.runtime.onMessage.addListener(
    function(request, sender, sendResponse){
      console.log(request.friend);
@@ -65,7 +67,7 @@ function contextOnClick(e){
     }
 
     curr_year_bday = month+' / '+day
-    var calendar_year_bday = curr_year+'-'+month+'-'+day
+    calendar_year_bday = curr_year+'-'+month+'-'+day
     createBirthdayEvent();
 }
 
@@ -122,16 +124,4 @@ function createBirthdayEvent(){
        });
       chrome.storage.sync.set({"current_friend":name});
   })
-}
-
-$(document).ready(function(){
-    $('#submit').click(function(){
-        name = $('#name').val()
-        bday = $('#bdy').val()
-        createBirthdayEvent();
-        console.log(name, bday)
-    })
-    $('#back').click(function(){
-        window.location.href = 'popup.html'
-    })
-})
+};
