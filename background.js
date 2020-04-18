@@ -44,13 +44,6 @@ chrome.contextMenus.onClicked.addListener(function(){
 });
 
 function contextOnClick(e){
-
-  chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-    const headers = new Headers({
-      'Authorization' : 'Bearer ' + token,
-      'Content-Type': 'application/json'
-    })
-
     var date_lst = lst[1].split(')')
     var date = date_lst[0]
     var month = date.split('/')[0]
@@ -73,6 +66,15 @@ function contextOnClick(e){
 
     curr_year_bday = month+' / '+day
     var calendar_year_bday = curr_year+'-'+month+'-'+day
+    createBirthdayEvent();
+}
+
+function createBirthdayEvent(){
+  chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+    const headers = new Headers({
+      'Authorization' : 'Bearer ' + token,
+      'Content-Type': 'application/json'
+    })
 
     event = {
       'summary': name + "'s Birthday",
@@ -121,3 +123,15 @@ function contextOnClick(e){
       chrome.storage.sync.set({"current_friend":name});
   })
 }
+
+$(document).ready(function(){
+    $('#submit').click(function(){
+        name = $('#name').val()
+        bday = $('#bdy').val()
+        createBirthdayEvent();
+        console.log(name, bday)
+    })
+    $('#back').click(function(){
+        window.location.href = 'popup.html'
+    })
+})
