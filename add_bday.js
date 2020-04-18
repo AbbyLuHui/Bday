@@ -1,10 +1,16 @@
 $(document).ready(function(){
-    $('#submit').click(function(){
+    $('#submit').click(function(e){
+        e.preventDefault()
         var name = $('#name').val()
-        var bday = $('#bdy').val()
-        console.log(name, bday)
+        var date = new Date($('#bday').val());
+        day = date.getDate();
+        month = date.getMonth() + 1;
+        year = date.getFullYear();
+        // var bday = $('#bday').val()
+        console.log(name, date, day,month, year)
     })
-    $('#back').click(function(){
+    $('#back').click(function(e){
+        e.preventDefault()
         window.location.href = 'popup.html'
     })
 })
