@@ -24,9 +24,7 @@ chrome.runtime.onInstalled.addListener(function() {
 var event;
 var lst;
 var name;
-var curr_year_bday;
 var temp_bday;
-var calendar_year_bday;
 
 chrome.runtime.onMessage.addListener(
    function(request, sender, sendResponse){
@@ -66,17 +64,19 @@ function contextOnClick(e){
       day = d.getDate();
     }
 
-    curr_year_bday = month+' / '+day
-    calendar_year_bday = curr_year+'-'+month+'-'+day
-    createBirthdayEvent();
+    var curr_year_bday = month+' / '+day
+    var calendar_year_bday = curr_year+'-'+month+'-'+day
+    createBirthdayEvent(name, calendar_year_bday, curr_year_bday);
 }
 
-function createBirthdayEvent(){
+function createBirthdayEvent(name, calendar_year_bday, curr_year_bday){
   chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
     const headers = new Headers({
       'Authorization' : 'Bearer ' + token,
       'Content-Type': 'application/json'
     })
+
+    console.log(token);
 
     event = {
       'summary': name + "'s Birthday",
@@ -103,6 +103,8 @@ function createBirthdayEvent(){
       method: "POST",
       body: JSON.stringify(event)
     };
+    console.log(createParams);
+
 
      fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events/', createParams)
        .then((response) => response.json()) // Transform the data into json
