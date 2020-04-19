@@ -35,6 +35,7 @@
     "48": "images/icons8-birthday-48.png",
     "128": "images/icons8-birthday-128.png"
   },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj451yhkOUgOqzUekF/tT9o97oAeAMMKfUZWgl8s+j8AHsWocoSXySm0S9wlKmyjnQ00ReIX1OvdPOa4rnt/5wS8WpE4NvrrTCLqQzuPuInrRcEespMriRVIEa10GG3eZb+ugzByzgpgw4D2RTeEq43QTNFXls0p3SWVW4DggVmrYv2y6OE81Fmj5hQ34k84Ecie3WO8hmXg//nG/GimgJJ0u2FD9QMLv1ZHN5f9llxX0XMkIisbmGK4K9kegGoWoB5aeJMpzTQqodIu8jxFuecAvZrlOE44cxq3X+TP75Qy0QppDBOPtIbyKRxdsJQ/Sf82pda1ad53S6xcQr2Ty3wIDAQAB",
   "content_security_policy": "script-src 'self' https://apis.google.com https://ajax.googleapis.com; object-src 'self'",
   "manifest_version": 2
 }
