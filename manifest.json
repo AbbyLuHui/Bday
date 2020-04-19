@@ -35,6 +35,6 @@
     "48": "images/icons8-birthday-48.png",
     "128": "images/icons8-birthday-128.png"
   },
-  "content_security_policy": "script-src 'self' https://apis.google.com https://ajax.googleapis.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://apis.google.com https://ajax.googleapis.com https://stackpath.bootstrapcdn.com; object-src 'self'",
   "manifest_version": 2
 }
